@@ -67,4 +67,35 @@ public class BasicHttpMethodsTests {
                 when().put("https://swaggerpetstore.przyklady.javastart.pl/v2/pet").
                 then().log().all().statusCode(200);
     }
+
+    @Test
+    public void givenExistingPetIdWhenDeletingPetThenIsDeletedTest(){
+//        String deletePet = "{\n" +
+//                "  \"id\": 56,\n" +
+//                "  \"category\": {\n" +
+//                "    \"id\": 1,\n" +
+//                "    \"name\": \"dogs\"\n" +
+//                "  },\n" +
+//                "  \"name\": \"Stafik_delete\",\n" +
+//                "  \"photoUrls\": [\n" +
+//                "    \"http://staffik.pl/wp-content/uploads/2016/06/2014_BRUNO-staffik-z-Bullerbyn-768x621.jpg\"\n" +
+//                "  ],\n" +
+//                "  \"tags\": [\n" +
+//                "    {\n" +
+//                "      \"id\": 1,\n" +
+//                "      \"name\": \"dogs-category\"\n" +
+//                "    }\n" +
+//                "  ],\n" +
+//                "  \"status\": \"available\"\n" +
+//                "}";
+//
+//        given().log().all().body(deletePet).contentType("application/json").
+//                when().post("https://swaggerpetstore.przyklady.javastart.pl/v2/pet").
+//                then().log().all().statusCode(200);
+
+        given().log().all().
+                pathParam("petId","56").
+                when().delete("https://swaggerpetstore.przyklady.javastart.pl/v2/pet/{petId}").
+                then().log().all().statusCode(200);
+    }
 }
