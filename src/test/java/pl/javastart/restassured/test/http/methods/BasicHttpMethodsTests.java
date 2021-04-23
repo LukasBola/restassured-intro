@@ -6,6 +6,20 @@ import static io.restassured.RestAssured.given;
 
 public class BasicHttpMethodsTests {
 
+    /**
+     GET
+     **/
+    @Test
+    public void givenExistingPetIdWhenGetPetThenReturnPetTest() {
+        given().log().all().
+                pathParam("petId","56").
+                when().get("https://swaggerpetstore.przyklady.javastart.pl/v2/pet/{petId}").
+                then().log().all().statusCode(200);
+    }
+
+    /**
+     POST
+     **/
     @Test
     public void givenPetWhenPostPetThenPetIsCreatedTest() {
         String pet = "{\n" +
@@ -33,14 +47,9 @@ public class BasicHttpMethodsTests {
                 then().log().all().statusCode(200);
     }
 
-    @Test
-    public void givenExistingPetIdWhenGetPetThenReturnPetTest() {
-        given().log().all().
-                pathParam("petId","56").
-                when().get("https://swaggerpetstore.przyklady.javastart.pl/v2/pet/{petId}").
-                then().log().all().statusCode(200);
-    }
-
+    /**
+     PUT
+     **/
     @Test
     public void givenExistingPetWhenUpdatePetNameThenPetIsChangedTest(){
         String updatePet = "{\n" +
@@ -68,6 +77,9 @@ public class BasicHttpMethodsTests {
                 then().log().all().statusCode(200);
     }
 
+    /**
+     DELETE
+     **/
     @Test
     public void givenExistingPetIdWhenDeletingPetThenIsDeletedTest(){
 //        String deletePet = "{\n" +
