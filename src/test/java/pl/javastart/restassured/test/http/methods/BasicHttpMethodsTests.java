@@ -18,7 +18,7 @@ public class BasicHttpMethodsTests {
     @Test
     public void givenExistingPetIdWhenGetPetThenReturnPetTest() {
         given().log().all().
-                pathParam("petId", "58").
+                pathParam("petId", "56").
                 when().get("https://swaggerpetstore.przyklady.javastart.pl/v2/pet/{petId}").
                 then().log().all().statusCode(200);
     }
