@@ -6,7 +6,6 @@ import pl.javastart.main.pojo.Pet;
 import pl.javastart.main.pojo.Tag;
 
 import java.util.Collections;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 

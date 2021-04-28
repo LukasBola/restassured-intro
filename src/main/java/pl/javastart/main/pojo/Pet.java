@@ -2,6 +2,7 @@
 package pl.javastart.main.pojo;
 
 import java.util.List;
+import java.util.Objects;
 import javax.annotation.Generated;
 
 @Generated("jsonschema2pojo")
@@ -62,4 +63,16 @@ public class Pet {
         this.status = status;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return Objects.equals(id, pet.id) && pet.category.equals(category) && Objects.equals(name, pet.name) && Objects.equals(photoUrls, pet.photoUrls) && pet.tags.equals(tags) && Objects.equals(status, pet.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, category, name, photoUrls, tags, status);
+    }
 }
