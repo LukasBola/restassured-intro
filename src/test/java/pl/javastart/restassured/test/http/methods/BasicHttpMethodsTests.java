@@ -6,18 +6,13 @@ import org.testng.annotations.Test;
 import pl.javastart.main.pojo.Category;
 import pl.javastart.main.pojo.Pet;
 import pl.javastart.main.pojo.Tag;
+import pl.javastart.restassured.test.TestBase;
 
 import java.util.Collections;
 
 import static io.restassured.RestAssured.given;
 
-public class BasicHttpMethodsTests {
-
-    @BeforeClass
-    public void setupConfiguration() {
-        RestAssured.baseURI = "https://swaggerpetstore.przyklady.javastart.pl";
-        RestAssured.basePath = "v2";
-    }
+public class BasicHttpMethodsTests extends TestBase {
 
     /**
      * GET

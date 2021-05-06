@@ -2,10 +2,11 @@ package pl.javastart.restassured.test.tasks;
 
 import org.testng.annotations.Test;
 import pl.javastart.main.pojo.user.User;
+import pl.javastart.restassured.test.TestBase;
 
 import static io.restassured.RestAssured.given;
 
-public class UserCreationTests {
+public class UserCreationTests extends TestBase {
 
     @Test
     public void givenCorrectUserDataWhenCreateUserThenUserIsCreatedTest() {
@@ -23,12 +24,12 @@ public class UserCreationTests {
         given().log().all().
                 body(user).
                 contentType("application/json").
-                when().post("https://swaggerpetstore.przyklady.javastart.pl/v2/user").
+                when().post("user").
                 then().log().all().statusCode(200);
 
         given().log().all().
                 pathParam("username", user.getUsername()).
-                when().get("https://swaggerpetstore.przyklady.javastart.pl/v2/user/{username}").
+                when().get("user/{username}").
                 then().log().all().statusCode(200);
     }
 }
