@@ -1,5 +1,7 @@
 package pl.javastart.restassured.test.http.methods;
 
+import io.restassured.RestAssured;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.javastart.main.pojo.Category;
 import pl.javastart.main.pojo.Pet;
@@ -11,6 +13,12 @@ import static io.restassured.RestAssured.given;
 
 public class BasicHttpMethodsTests {
 
+    @BeforeClass
+    public void setupConfiguration() {
+        RestAssured.baseURI = "https://swaggerpetstore.przyklady.javastart.pl";
+        RestAssured.basePath = "v2";
+    }
+
     /**
      * GET
      **/
@@ -18,7 +26,7 @@ public class BasicHttpMethodsTests {
     public void givenExistingPetIdWhenGetPetThenReturnPetTest() {
         given().log().all().
                 pathParam("petId", "777").
-                when().get("https://swaggerpetstore.przyklady.javastart.pl/v2/pet/{petId}").
+                when().get("pet/{petId}").
                 then().log().all().statusCode(200);
     }
 
@@ -46,7 +54,7 @@ public class BasicHttpMethodsTests {
 
         given().log().all().
                 body(pet).contentType("application/json").
-                when().post("https://swaggerpetstore.przyklady.javastart.pl/v2/pet").
+                when().post("pet").
                 then().log().all().statusCode(200);
     }
 
@@ -75,7 +83,7 @@ public class BasicHttpMethodsTests {
 
         given().log().all().
                 body(pet).contentType("application/json").
-                when().put("https://swaggerpetstore.przyklady.javastart.pl/v2/pet").
+                when().put("pet").
                 then().log().all().statusCode(200);
     }
 
@@ -103,14 +111,14 @@ public class BasicHttpMethodsTests {
         pet.setStatus("available");
 
         given().log().all().body(pet).contentType("application/json").
-                when().post("https://swaggerpetstore.przyklady.javastart.pl/v2/pet").
+                when().post("pet").
                 then().log().all().statusCode(200);
 
         given().
                 log().all().
                 pathParam("petId", pet.getId())
                 .when().
-                delete("https://swaggerpetstore.przyklady.javastart.pl/v2/pet/{petId}")
+                delete("pet/{petId}")
                 .then().
                 log().all().statusCode(200);
     }
