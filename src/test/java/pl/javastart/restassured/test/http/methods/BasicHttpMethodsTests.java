@@ -1,7 +1,5 @@
 package pl.javastart.restassured.test.http.methods;
 
-import io.restassured.RestAssured;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.javastart.main.pojo.Category;
 import pl.javastart.main.pojo.Pet;
@@ -19,10 +17,10 @@ public class BasicHttpMethodsTests extends TestBase {
      **/
     @Test
     public void givenExistingPetIdWhenGetPetThenReturnPetTest() {
-        given().log().all().
+        given().
                 pathParam("petId", "777").
                 when().get("pet/{petId}").
-                then().log().all().statusCode(200);
+                then().statusCode(200);
     }
 
     /**
@@ -47,10 +45,10 @@ public class BasicHttpMethodsTests extends TestBase {
         pet.setTags(Collections.singletonList(tag));
         pet.setStatus("available");
 
-        given().log().all().
+        given().
                 body(pet).contentType("application/json").
                 when().post("pet").
-                then().log().all().statusCode(200);
+                then().statusCode(200);
     }
 
     /**
@@ -76,10 +74,10 @@ public class BasicHttpMethodsTests extends TestBase {
         pet.setStatus("available");
 
 
-        given().log().all().
+        given().
                 body(pet).contentType("application/json").
                 when().put("pet").
-                then().log().all().statusCode(200);
+                then().statusCode(200);
     }
 
     /**
@@ -105,16 +103,14 @@ public class BasicHttpMethodsTests extends TestBase {
         pet.setTags(Collections.singletonList(tag));
         pet.setStatus("available");
 
-        given().log().all().body(pet).contentType("application/json").
+        given().body(pet).contentType("application/json").
                 when().post("pet").
-                then().log().all().statusCode(200);
+                then().statusCode(200);
 
         given().
-                log().all().
                 pathParam("petId", pet.getId())
                 .when().
                 delete("pet/{petId}")
-                .then().
-                log().all().statusCode(200);
+                .then().statusCode(200);
     }
 }
