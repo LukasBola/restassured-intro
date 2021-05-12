@@ -1,16 +1,31 @@
 package pl.javastart.restassured.test.http.methods;
 
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pl.javastart.main.pojo.Category;
 import pl.javastart.main.pojo.Pet;
 import pl.javastart.main.pojo.Tag;
-import pl.javastart.restassured.test.TestBase;
 
 import java.util.Collections;
 
 import static io.restassured.RestAssured.given;
 
-public class BasicHttpMethodsTests extends TestBase {
+public class BasicHttpMethodsTests {
+
+    @BeforeClass
+    public void setupConfiguration() {
+        RestAssured.baseURI = "https://swaggerpetstore.przyklady.javastart.pl";
+        RestAssured.basePath = "v2";
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+
+        RestAssured.requestSpecification = new RequestSpecBuilder().setContentType("application/json").build();
+        RestAssured.responseSpecification = new ResponseSpecBuilder().expectStatusCode(201).build();
+    }
 
     /**
      * GET
@@ -19,8 +34,7 @@ public class BasicHttpMethodsTests extends TestBase {
     public void givenExistingPetIdWhenGetPetThenReturnPetTest() {
         given().
                 pathParam("petId", "777").
-                when().get("pet/{petId}").
-                then().statusCode(200);
+                when().get("pet/{petId}");
     }
 
     /**
@@ -45,10 +59,8 @@ public class BasicHttpMethodsTests extends TestBase {
         pet.setTags(Collections.singletonList(tag));
         pet.setStatus("available");
 
-        given().
-                body(pet).contentType("application/json").
-                when().post("pet").
-                then().statusCode(200);
+        given().body(pet).
+                when().post("pet");
     }
 
     /**
@@ -74,10 +86,8 @@ public class BasicHttpMethodsTests extends TestBase {
         pet.setStatus("available");
 
 
-        given().
-                body(pet).contentType("application/json").
-                when().put("pet").
-                then().statusCode(200);
+        given().body(pet).
+                when().put("pet");
     }
 
     /**
@@ -103,14 +113,12 @@ public class BasicHttpMethodsTests extends TestBase {
         pet.setTags(Collections.singletonList(tag));
         pet.setStatus("available");
 
-        given().body(pet).contentType("application/json").
-                when().post("pet").
-                then().statusCode(200);
+        given().body(pet).
+                when().post("pet");
 
         given().
                 pathParam("petId", pet.getId())
                 .when().
-                delete("pet/{petId}")
-                .then().statusCode(200);
+                delete("pet/{petId}");
     }
 }
