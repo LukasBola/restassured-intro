@@ -5,6 +5,7 @@ import pl.javastart.main.pojo.user.User;
 import pl.javastart.restassured.test.TestBase;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class UserCreationTests extends TestBase {
 
@@ -13,7 +14,7 @@ public class UserCreationTests extends TestBase {
 
         User user = new User();
         user.setId(156);
-        user.setUsername("lukasss");
+        user.setUsername("lukasss2345");
         user.setFirstName("luk");
         user.setLastName("asssdr");
         user.setEmail("lub@ass.pl");
@@ -25,11 +26,24 @@ public class UserCreationTests extends TestBase {
                 body(user).
                 contentType("application/json").
                 when().post("user").
-                then().statusCode(200);
+                then().
+                assertThat().statusCode(200).
+                assertThat().body("code", equalTo(200)).
+                assertThat().body("type", equalTo("unknown")).
+                assertThat().body("message", equalTo("156"));
 
         given().
                 pathParam("username", user.getUsername()).
                 when().get("user/{username}").
-                then().statusCode(200);
+                then().
+                assertThat().statusCode(200).
+                assertThat().body("id", equalTo(user.getId())).
+                assertThat().body("username", equalTo(user.getUsername())).
+                assertThat().body("firstName", equalTo(user.getFirstName())).
+                assertThat().body("lastName", equalTo(user.getLastName())).
+                assertThat().body("email", equalTo(user.getEmail())).
+                assertThat().body("password", equalTo(user.getPassword())).
+                assertThat().body("phone", equalTo(user.getPhone())).
+                assertThat().body("userStatus", equalTo(user.getUserStatus()));
     }
 }
