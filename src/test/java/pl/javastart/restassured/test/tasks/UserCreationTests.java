@@ -30,7 +30,7 @@ public class UserCreationTests extends TestBase {
                 assertThat().statusCode(200).
                 assertThat().body("code", equalTo(200)).
                 assertThat().body("type", equalTo("unknown")).
-                assertThat().body("message", equalTo("156"));
+                assertThat().body("message", equalTo(Integer.toString(user.getId())));
 
         given().
                 pathParam("username", user.getUsername()).
