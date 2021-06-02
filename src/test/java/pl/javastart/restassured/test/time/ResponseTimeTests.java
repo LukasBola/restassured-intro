@@ -1,4 +1,4 @@
-package pl.javastart.restassured.test;
+package pl.javastart.restassured.test.time;
 
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;
