@@ -24,7 +24,7 @@ public class BasicHttpMethodsTests {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
 
         RestAssured.requestSpecification = new RequestSpecBuilder().setContentType("application/json").build();
-        RestAssured.responseSpecification = new ResponseSpecBuilder().expectStatusCode(201).build();
+        RestAssured.responseSpecification = new ResponseSpecBuilder().expectStatusCode(200).build();
     }
 
     /**

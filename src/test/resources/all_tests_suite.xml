@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Smoke tests">
+
+    <test name="All Tests from package tests">
+        <packages>
+            <package name="pl.javastart.restassured.test.headers.and.cookies"/>
+            <package name="pl.javastart.restassured.test.http.methods"/>
+            <package name="pl.javastart.restassured.test.jsonpath"/>
+        </packages>
+    </test>
+
+</suite>
