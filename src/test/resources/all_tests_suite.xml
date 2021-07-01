@@ -10,4 +10,8 @@
         </packages>
     </test>
 
+    <listeners>
+        <listener class-name="pl.javastart.restassured.test.testng.TestListener"/>
+    </listeners>
+
 </suite>
