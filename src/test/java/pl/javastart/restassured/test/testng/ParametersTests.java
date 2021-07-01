@@ -22,8 +22,10 @@ public class ParametersTests {
 
     @Parameters({"petId", "expectedMessage"})
     @Test
-    public void givenNonExistingPetIdWhenGetPetThenPetNotFoundTest(@Optional("0") String petId,
-                                                                   @Optional("Pet not found") String expectedMessage) {
+    public void givenNonExistingPetIdWhenGetPetThenPetNotFoundTest(@Optional("0")
+                                                                           String petId,
+                                                                   @Optional("Pet not found")
+                                                                           String expectedMessage) {
         given()
                 .when().get("pet/{param}", petId)
                 .then().statusCode(404)
