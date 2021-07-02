@@ -6,8 +6,12 @@ import org.testng.ITestResult;
 
 public class TestListener implements ITestListener {
 
+    String startSpace = "\n\n-----------------";
+    String finishSpace = "-----------------\n\n";
+
     @Override
     public void onTestStart(ITestResult result) {
+        System.out.println(startSpace);
         System.out.println("Starting test: " + result.getMethod().getMethodName());
 
     }
@@ -15,7 +19,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult result) {
         System.out.println("Finished successfully test: " + result.getMethod().getMethodName());
-
+        System.out.println(finishSpace);
     }
 
     @Override
