@@ -4,13 +4,16 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pl.javastart.main.pojo.user.User;
 import pl.javastart.restassured.test.TestBase;
+import pl.javastart.restassured.test.testng.TestListener;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
+@Listeners(TestListener.class)
 public class UserUpdateTests extends TestBase {
 
     @Test
@@ -49,10 +52,10 @@ public class UserUpdateTests extends TestBase {
                 assertThat().spec(userCreationResponseSpecification);
 
         given().spec(defaultRequestSpecification).
-                pathParam("username", user.getUsername()).
-                body(user).
+//                pathParam("username", user.getUsername()).
+        body(user).
                 contentType("application/json").
-                when().put("user/{username}").
+                when().put("user/{username}", user.getUsername()).
                 then().
                 assertThat().spec(userCreationResponseSpecification);
 
